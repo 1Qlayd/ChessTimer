@@ -4,30 +4,30 @@ import colors  from './styles/colors';
 
 export default function App() {
 
-  const [Toggler, setToggler] = useState(true);
+  const [Toggle, setToggle] = useState(true);
   
-  const changeToggler  = () => {
-      if(Toggler)
-      setToggler(false)
+  const changeToggle  = () => {
+      if(Toggle)
+      setToggle(false)
       else
-      setToggler(true)
+      setToggle(true)
   }
 
   return (
     <View style={styles.container}>   
 
       <TouchableOpacity 
-        disabled = {Toggler ? false : true} 
-        style = {[styles.buttonDown, { backgroundColor: Toggler ? colors.GREEN : colors.GRAY }]}
-        onPress = {changeToggler}
+        disabled = {Toggle ? false : true} 
+        style = {[styles.buttonUp, { backgroundColor: Toggle ? colors.GREEN : colors.GRAY }]}
+        onPress = {changeToggle}
         >
         <Text style={styles.text}>TIMER</Text>
       </TouchableOpacity> 
 
       <TouchableOpacity 
-        disabled = {Toggler ? true : false} 
-        style={[styles.buttonUp,{backgroundColor: Toggler ? colors.GRAY : colors.GREEN}]}
-        onPress = {changeToggler}
+        disabled = {Toggle ? true : false} 
+        style={[styles.buttonDown,{backgroundColor: Toggle ? colors.GRAY : colors.GREEN}]}
+        onPress = {changeToggle}
         >
         <Text style={styles.text}>TIMER</Text>
       </TouchableOpacity>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     color:colors.WHITE,
     fontSize:50,
   },
-    buttonDown:{
+    buttonUp:{
       width:'100%',
       height:'50%',
       borderRadius:5,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       transform: [{rotate: '180deg'}],
     },
-    buttonUp:{
+    buttonDown:{
       backgroundColor:colors.BLACK,
       borderRadius:5,
       width:'100%',
