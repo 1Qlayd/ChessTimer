@@ -1,32 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {SafeAreaView, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import { Timer } from 'react-native-stopwatch-timer';
 import colors  from '../styles/colors';
+import { TimerContext } from './TimerContext';
 
 export const MainScreen = ({navigation}) => {
 
-  const [timerDuration, setTimerDuration] = useState(180000);
+  const { timerDuration } = useContext(TimerContext);
   const [isTimerStart, setIsTimerStart] = useState(false);
   const [isTimerStart2, setIsTimerStart2] = useState(false);
   const [reset, setReset] = useState(false);
   const [Toggle, setToggle] = useState(false);
-  
+
+  useEffect(() => {
+    setReset(true);
+  },
+  [timerDuration]);
+
+  useEffect(() => {
+    if(reset){
+      setReset(false);
+  }
+  },
+  [reset]); 
 
   const changeToggle  = () => {
-      if(Toggle)
+    if(Toggle)
       setToggle(false)
-      else
+    else
       setToggle(true)
       startWork();
   }
 
   const startWork = () => { //добавить второе нажатие на кнопку, чтобы таймер не запускался 
-
     if(Toggle === true){
       setIsTimerStart(false)
       setIsTimerStart2(true)
     }
-    
     else {
       setIsTimerStart(true)
       setIsTimerStart2(false)
@@ -35,12 +45,16 @@ export const MainScreen = ({navigation}) => {
   }
 
   const breakWork = () => {  
-    return ( setIsTimerStart2(false), setIsTimerStart(false), setReset(true) )
+    setIsTimerStart2(false); 
+    setIsTimerStart(false); 
+    setReset(true);
   }
+
+  
 
   return (
     <SafeAreaView style={styles.container}>   
-
+  
       <TouchableOpacity 
         style ={styles.buttonReset}
         onPress={breakWork}
@@ -109,7 +123,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     opacity: 0.9,
   },
-  text:{
+  text:{ 
     color:colors.WHITE,
     fontSize:50,
   },
