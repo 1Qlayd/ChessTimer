@@ -63,9 +63,10 @@ export const MainScreen = ({navigation}) => {
       </TouchableOpacity>
 
       <TouchableOpacity 
-        style ={styles.buttonSettings}
+        style = {[styles.buttonSettings,{ opacity:isTimerStart || isTimerStart2 ? 0 : 1 }]}
         onPress={() => navigation.navigate('Settings')}
         >
+          <Image source={require('../assets/icon/SettingsIcon.png')} style={{ width:50, height:50}}/>
       </TouchableOpacity>
         
       <TouchableOpacity
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
   buttonUp:{
     width:'100%',
     height:'50%',
-    borderRadius:5,
+    borderRadius:15,
     alignItems: 'center',
     justifyContent:'center',
     transform: [{rotate: '180deg'}],
@@ -146,9 +147,10 @@ const styles = StyleSheet.create({
   buttonReset:{
     zIndex:1,
     position:'absolute',
-    width:'15%',
-    height:'7%',
-    borderRadius:25,
+    width:'30%',
+    height:'14%',
+    borderRadius:60,
+    marginLeft:150,
     backgroundColor: colors.WHITE,
     alignItems: 'center',
     justifyContent:'center',
